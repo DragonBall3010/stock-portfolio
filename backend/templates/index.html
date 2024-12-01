@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Portfolio</title>
-    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Welcome to the Stock Portfolio Management System</h1>
+    <h1>Welcome to Stock Portfolio</h1>
+    {% if current_user.is_authenticated %}
+        <p>Hello, {{ current_user.username }}! <a href="{{ url_for('logout') }}">Logout</a></p>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a></p>
+    {% endif %}
+    
+    <h2>Stocks</h2>
+    {% if stock_data %}
+        <h2>Stock Information</h2>
+        <p>Symbol: {{ stock_data['symbol'] }}</p>
+        <p>Current Price: ${{ stock_data['current_price'] }}</p>
+        <p>High: ${{ stock_data['high'] }}</p>
+        <p>Low: ${{ stock_data['low'] }}</p>
+        <p>Open: ${{ stock_data['open'] }}</p>
+        <p>Previous Close: ${{ stock_data['previous_close'] }}</p>
+    {% else %}
+        <p>No stock data available.</p>
+    {% endif %}
 </body>
 </html>

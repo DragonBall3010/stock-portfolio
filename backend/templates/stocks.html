@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Stocks</title>
+</head>
+<body>
+    <h1>Available Stocks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Stock Symbol</th>
+                <th>Stock Name</th>
+                <th>Current Price</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.name }}</td>
+                <td>{{ stock.current_price }}</td>
+                <td><a href="{{ url_for('buy_stock', stock_id=stock.id) }}">Buy</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
